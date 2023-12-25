@@ -1,0 +1,22 @@
+﻿@model CQRSProject.CQRSPattern.Results.GetCategoryByIdQueryResult
+@{
+    Layout = null;
+}
+
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+
+<div class="container">
+    <br /><br />
+    <form method="post">
+        <label>Kategori ID</label>
+        <br />
+        <input type="text" asp-for="CategoryID" class="form-control" />
+        <br />
+        <label>Kategori Adı</label>
+        <br />
+        <input type="text" asp-for="CategoryName" class="form-control" />
+        <br />
+        <button class="btn btn-outline-success">Güncelle</button>
+    </form>
+</div>
