@@ -1,5 +1,6 @@
 ﻿using CQRSProject.CQRSPattern.Commands;
 using CQRSProject.CQRSPattern.Handlers;
+using CQRSProject.CQRSPattern.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CQRSProject.Controllers
@@ -8,11 +9,13 @@ namespace CQRSProject.Controllers
     {
         private readonly GetCategoryQueryHandler _getCategoryQueryHandler;
         private readonly CreateCategoryCommandHandler _createCategoryCommandHandler;
+        private readonly GetCategoryByIdQueryHandler _getCategoryByIdQueryHandler;
 
-        public CategoryController(GetCategoryQueryHandler getCategoryQueryHandler, CreateCategoryCommandHandler createCategoryCommandHandler)
+        public CategoryController(GetCategoryQueryHandler getCategoryQueryHandler, CreateCategoryCommandHandler createCategoryCommandHandler, GetCategoryByIdQueryHandler getCategoryByIdQueryHandler)
         {
             _getCategoryQueryHandler = getCategoryQueryHandler;
             _createCategoryCommandHandler = createCategoryCommandHandler;
+            _getCategoryByIdQueryHandler = getCategoryByIdQueryHandler;
         }
 
         public IActionResult Index()
@@ -30,6 +33,12 @@ namespace CQRSProject.Controllers
         {
             _createCategoryCommandHandler.Handle(command);
             return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public IActionResult UpdateCategory(int id)
+        {
+            var values = _getCategoryByIdQueryHandler.Handle(new GetCategoryByIdQuery(id));
+            return View(values);
         }
     }
 }
