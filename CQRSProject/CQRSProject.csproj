@@ -11,7 +11,6 @@
     <Folder Include="CQRSPattern\Handlers\" />
     <Folder Include="CQRSPattern\Results\" />
     <Folder Include="CQRSPattern\Queries\" />
-    <Folder Include="DAL\Context\" />
   </ItemGroup>
 
   <ItemGroup>
