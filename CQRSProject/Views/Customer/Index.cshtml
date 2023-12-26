@@ -1,0 +1,35 @@
+﻿@model List<CQRSProject.MediatorDesignPattern.Results.GetAllCustormerQueryResult>
+@{
+    Layout = null;
+}
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+
+
+<div class="container">
+    <br /><br /><br />
+    <table class="table table-bordered">
+        <tr>
+            <th>#</th>
+            <th>Müşteri Adı</th>
+            <th>Müşteri Soyadı</th>
+            <th>Departman</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>@item.CustomerID</td>
+                <td>@item.Name</td>
+                <td>@item.Surname</td>
+                <td>@item.Department</td>
+                <td><a href="/Customer/DeleteCustomer/@item.CustomerID" class="btn btn-outline-danger">Sil</a></td>
+                <td><a href="/Customer/UpdateCustomer/@item.CustomerID" class="btn btn-outline-success">Güncelle</a></td>
+            </tr>
+        }
+
+    </table>
+    <a href="/Product/CreateProduct" class="btn btn-primary">Yeni Müşteri Girişi</a>
+</div>
