@@ -23,5 +23,6 @@ namespace CQRSProject.MediatorDesignPattern.Handlers
                 Surname = request.Surname,
             });
             await _context.SaveChangesAsync();
+        }
     }
 }

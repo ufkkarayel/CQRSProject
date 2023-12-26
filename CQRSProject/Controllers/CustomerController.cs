@@ -1,4 +1,5 @@
-﻿using CQRSProject.MediatorDesignPattern.Queries;
+﻿using CQRSProject.MediatorDesignPattern.Commands;
+using CQRSProject.MediatorDesignPattern.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,17 @@ namespace CQRSProject.Controllers
         {
             var values =await _mediator.Send(new GetAllCustomerQuery());
             return View(values);
+        }
+        [HttpGet]
+        public IActionResult CreateCustomer() 
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateCustomer(CreateCustomerCommand command)
+        {
+            await _mediator.Send(command);
+            return View();
         }
     }
 }
