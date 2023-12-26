@@ -11,13 +11,15 @@ namespace CQRSProject.Controllers
         private readonly CreateCategoryCommandHandler _createCategoryCommandHandler;
         private readonly GetCategoryByIdQueryHandler _getCategoryByIdQueryHandler;
         private readonly UpdateCategoryCommandHandler _updateCategoryCommandHandler;
+        private readonly RemoveCategoryCommandHandler _removeCategoryCommandHandler;
 
-        public CategoryController(GetCategoryQueryHandler getCategoryQueryHandler, CreateCategoryCommandHandler createCategoryCommandHandler, GetCategoryByIdQueryHandler getCategoryByIdQueryHandler, UpdateCategoryCommandHandler updateCategoryCommandHandler)
+        public CategoryController(GetCategoryQueryHandler getCategoryQueryHandler, CreateCategoryCommandHandler createCategoryCommandHandler, GetCategoryByIdQueryHandler getCategoryByIdQueryHandler, UpdateCategoryCommandHandler updateCategoryCommandHandler, RemoveCategoryCommandHandler removeCategoryCommandHandler)
         {
             _getCategoryQueryHandler = getCategoryQueryHandler;
             _createCategoryCommandHandler = createCategoryCommandHandler;
             _getCategoryByIdQueryHandler = getCategoryByIdQueryHandler;
             _updateCategoryCommandHandler = updateCategoryCommandHandler;
+            _removeCategoryCommandHandler = removeCategoryCommandHandler;
         }
 
         public IActionResult Index()
@@ -48,5 +50,11 @@ namespace CQRSProject.Controllers
             _updateCategoryCommandHandler.Handle(command);
             return RedirectToAction("Index");
         }
+        public IActionResult DeleteCategory(int id)
+        {
+            _removeCategoryCommandHandler.Handle(new RemoveCategoryCommand(id));
+            return RedirectToAction("Index");
+        }
+        
     }
 }
