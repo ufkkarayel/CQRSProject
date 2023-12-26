@@ -10,12 +10,14 @@ namespace CQRSProject.Controllers
         private readonly GetCategoryQueryHandler _getCategoryQueryHandler;
         private readonly CreateCategoryCommandHandler _createCategoryCommandHandler;
         private readonly GetCategoryByIdQueryHandler _getCategoryByIdQueryHandler;
+        private readonly UpdateCategoryCommandHandler _updateCategoryCommandHandler;
 
-        public CategoryController(GetCategoryQueryHandler getCategoryQueryHandler, CreateCategoryCommandHandler createCategoryCommandHandler, GetCategoryByIdQueryHandler getCategoryByIdQueryHandler)
+        public CategoryController(GetCategoryQueryHandler getCategoryQueryHandler, CreateCategoryCommandHandler createCategoryCommandHandler, GetCategoryByIdQueryHandler getCategoryByIdQueryHandler, UpdateCategoryCommandHandler updateCategoryCommandHandler)
         {
             _getCategoryQueryHandler = getCategoryQueryHandler;
             _createCategoryCommandHandler = createCategoryCommandHandler;
             _getCategoryByIdQueryHandler = getCategoryByIdQueryHandler;
+            _updateCategoryCommandHandler = updateCategoryCommandHandler;
         }
 
         public IActionResult Index()
@@ -39,6 +41,12 @@ namespace CQRSProject.Controllers
         {
             var values = _getCategoryByIdQueryHandler.Handle(new GetCategoryByIdQuery(id));
             return View(values);
+        }
+        [HttpPost]
+        public IActionResult UpdateCategory(UpdateCategoryCommand command)
+        {
+            _updateCategoryCommandHandler.Handle(command);
+            return RedirectToAction("Index");
         }
     }
 }
