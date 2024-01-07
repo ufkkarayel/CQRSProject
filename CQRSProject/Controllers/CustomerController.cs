@@ -30,5 +30,10 @@ namespace CQRSProject.Controllers
             await _mediator.Send(command);
             return View();
         }
+        public  async Task<IActionResult> DeleteCustomer(int id)
+        {
+            await _mediator.Send(new RemoveCustomerCommand(id));
+            return RedirectToAction("Index");
+        }
     }
 }
